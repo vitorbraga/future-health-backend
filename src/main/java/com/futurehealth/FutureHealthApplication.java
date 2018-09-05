@@ -1,4 +1,4 @@
-package com.futurehealth.futurehealth;
+package com.futurehealth;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
