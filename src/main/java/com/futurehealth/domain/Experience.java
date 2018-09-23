@@ -1,8 +1,6 @@
 package com.futurehealth.domain;
 
-import lombok.AccessLevel;
-import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,7 +8,8 @@ import java.time.Instant;
 @Entity
 @Table(name = "experience")
 @Data
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Experience {
 
     @Id
@@ -34,11 +33,16 @@ public class Experience {
     private String location;
 
     @Column(name = "created_at")
-    private Instant createdAt;
+    @Setter(AccessLevel.NONE)
+    private Instant createdAt = Instant.now();
 
     @Column(name = "updated_at")
-    private Instant updatedAt;
+    @Setter(AccessLevel.NONE)
+    private Instant updatedAt = Instant.now();
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Doctor doctor;
+
+    @PreUpdate
+    public void setLastUpdate() {  this.updatedAt = Instant.now(); }
 }

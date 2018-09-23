@@ -5,8 +5,10 @@ import com.futurehealth.service.DoctorService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
-@RequestMapping("doctors")
+@RequestMapping("/doctors")
 public class DoctorController {
 
     private DoctorService doctorService;
@@ -17,22 +19,23 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}")
-    public DoctorDTO getById(@PathVariable Long doctorId) {
+    public DoctorDTO getById(@Valid @PathVariable Long doctorId) {
         return doctorService.getDoctorById(doctorId);
     }
 
     @PostMapping
-    public DoctorDTO createDoctor(@RequestBody DoctorDTO doctorDTO) {
+    public DoctorDTO createDoctor(@Valid @RequestBody DoctorDTO doctorDTO) {
         return doctorService.createDoctor(doctorDTO);
     }
 
     @PutMapping("/{doctorId}")
     public DoctorDTO update(@RequestBody DoctorDTO doctorDTO) {
-        return null;
+        return doctorService.updateDoctor(doctorDTO);
     }
 
     @DeleteMapping("/{doctorId}")
     public void deleteDoctor(@PathVariable Long doctorId) {
         doctorService.deleteDoctor(doctorId);
     }
+
 }

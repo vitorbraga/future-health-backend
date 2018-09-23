@@ -4,7 +4,10 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "doctor")
@@ -22,8 +25,15 @@ public class Doctor extends User {
     private String facebookUrl;
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
-    private List<Experience> experiences;
+    private List<Experience> experiences = new ArrayList<>();
 
     @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
     private List<Education> educations;
+
+    @ManyToMany(cascade = CascadeType.ALL)
+    @JoinTable(name = "doctor_role",
+            joinColumns = @JoinColumn(name = "doctor_id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    private Set<Role> roles = new HashSet<>();
+
 }

@@ -1,8 +1,8 @@
 package com.futurehealth.domain;
 
-import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -10,7 +10,8 @@ import java.time.Instant;
 @Entity
 @Table(name = "education")
 @Data
-@AllArgsConstructor(access = AccessLevel.PACKAGE)
+@AllArgsConstructor
+@NoArgsConstructor
 public class Education {
 
     @Id
